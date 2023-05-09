@@ -172,12 +172,16 @@ def main():
         
         for bomb in bombs:
             bomb.update(screen) 
-            if bird._rct.colliderect(bomb._rct):
+            if bird._rct.colliderect(bomb._rct) and tmr >= 800:
                 # ゲームオーバー時に，こうかとん画像を切り替え，1秒間表示させる
                 bird.change_img(8, screen)
                 pg.display.update()
                 time.sleep(1)
-                return       
+                if random.randint(1,5) == 1:
+                    Flag = True
+                    bird.change_img(7, screen)
+                else:
+                    return
         
         key_lst = pg.key.get_pressed()
         bird.update(key_lst, screen)
